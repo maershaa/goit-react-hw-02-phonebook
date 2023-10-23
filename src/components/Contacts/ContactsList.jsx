@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { nanoid } from 'nanoid';
 import css from 'components/Contacts/Contacts.module.css';
-import Filter from "../Filter/Filter";
+// import Filter from "../Filter/Filter";
 
 class ContactsList extends Component {
   state = {
