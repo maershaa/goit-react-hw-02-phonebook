@@ -8,11 +8,15 @@ class App extends Component {
     filter: "", // Строка для фильтрации контактов
   };
 
+  isNameInContacts = (name) => {
+    return this.state.contacts.some((contact) => contact.name === name);
+  }
+
   // Метод для добавления нового контакта
   addContact = (contact) => {
     const { name } = contact;
     // Проверяем, существует ли контакт с таким именем
-    if (this.isNameInContacts(name)) {
+     if (this.isNameInContacts(name)) {
       alert(`Контакт с именем ${name} уже существует!`);
     } else {
       // Если контакта с таким именем нет, добавляем его в состояние
@@ -26,6 +30,8 @@ class App extends Component {
   handleFilterChange = (filter) => {
     this.setState({ filter });
   };
+
+
 
   render() {
     return (

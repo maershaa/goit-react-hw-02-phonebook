@@ -19,25 +19,18 @@ class ContactForm extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = evt => {
-    evt.preventDefault();
-    const { name, number } = this.state;
-    if (this.isNameInContacts(name)) {
-      alert(`Контакт с именем ${name} уже существует!`);
-    } else {
-      const contact = {
-        id: nanoid(),
-        name,
-        number,
-      };
-      this.props.onSubmit(contact);
-      this.reset();
-    }
+handleSubmit = (evt) => {
+  evt.preventDefault();
+  const { name, number } = this.state;
+  const contact = {
+    id: nanoid(),
+    name,
+    number,
   };
+  this.props.onSubmit(contact);
+  this.reset();
+};
 
-  isNameInContacts = (name) => {
-    return this.state.contacts.some((contact) => contact.name === name);
-  }
 
   reset() {
     this.setState({ ...INITIAL_STATE });
