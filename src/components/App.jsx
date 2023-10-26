@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import ContactForm from "./Form/Form"; // Импортируем компонент формы для добавления контактов
 import ContactList from  "./Contacts/ContactsList"; // Импортируем компонент списка контактов
+import Filter from "./Filter/Filter";
 
 class App extends Component {
-  state = {
-    contacts: [], // Массив контактов
-    filter: "", // Строка для фильтрации контактов
-  };
+state = {
+  contacts: [],
+  filter: ''
+}
 
-  isNameInContacts = (name) => {
-    return this.state.contacts.some((contact) => contact.name === name);
-  }
+isNameInContacts = (name) => {
+  const { contacts } = this.state;
+  return contacts && contacts.length > 0 && contacts.some((contact) => contact.name === name);
+}
+
 
   // Метод для добавления нового контакта
   addContact = (contact) => {
@@ -26,24 +29,37 @@ class App extends Component {
     }
   };
 
-  // Метод для обновления фильтрации контактов
-  handleFilterChange = (filter) => {
-    this.setState({ filter });
+
+
+    // Метод для получения отфильтрованного массива контактов
+  getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
   };
 
 
-
+  // Обработчик изменения значения фильтра
+  handleFilterChange = (filter) => {
+    this.setState({ filter });
+    console.log(filter)
+  }
   render() {
+
+        const filteredContacts = this.getFilteredContacts(); // Получаем отфильтрованный массив контактов
+
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} /> {/* Рендерим форму для добавления контактов и передаем метод addContact как обработчик */}
         
         <h2>Contacts</h2>
-        <ContactList
-          contacts={this.state.contacts} // Передаем массив контактов
-          filter={this.state.filter} // Передаем строку для фильтрации
-          onDeleteContact={this.handleDeleteContact} // Передаем метод для удаления контакта
+        <Filter value={this.state.filter} onChange={this.handleFilterChange} />
+
+      <ContactList
+          contacts={filteredContacts} // Передаем отфильтрованный массив контактов
+          filter={this.state.filter}
         />
       </div>
     );

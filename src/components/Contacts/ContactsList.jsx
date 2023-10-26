@@ -25,18 +25,24 @@ class ContactsList extends Component {
     this.setState({ [name]: value });
   }
 
-  // Обработчик изменения фильтра
-  handleFilterChange = (value) => {
-    this.setState({ filter: value });
-  }
+
 
   // Обработчик добавления нового контакта
-  addContact = (contact) => {
-    //  Этот метод принимает функцию, которая в качестве аргумента принимает предыдущее состояние компонента (prevState), и возвращает новый объект состояния, который будет объединен с предыдущим состоянием.
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
+addContact = (contact) => {
+  const { name, number } = contact;
+
+  if (name.trim() === '' || number.trim() === '') {
+    alert('Имя и номер контакта не могут быть пустыми.');
+        console.log(name)
+    return;
   }
+
+  this.setState(prevState => ({
+    contacts: [...prevState.contacts, { ...contact, id: nanoid() }],
+
+  }));
+
+};
 
   // Обработчик удаления контакта по ID
   handleDeleteContact = (contactId) => {
