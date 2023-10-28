@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { nanoid } from 'nanoid';
-import css from 'components/Form/Form.module.css';
+import css from 'components/ContactForm/ContactForm.module.css';
 
 const INITIAL_STATE = {
-  contacts: [],
-  filter: '',
   name: '',
   number: '',
 };
@@ -19,7 +17,7 @@ class ContactForm extends Component {
     this.setState({ [name]: value });
   };
 
-handleSubmit = (evt) => {
+  handleSubmit = (evt) => {
   evt.preventDefault();
   const { name, number } = this.state;
   const contact = {
@@ -29,17 +27,11 @@ handleSubmit = (evt) => {
   };
   this.props.onSubmit(contact);
   this.reset();
-};
   
+  };
 
-
-
-
-
-
-
-
-
+  
+  
   reset() {
     this.setState({ ...INITIAL_STATE });
   }
