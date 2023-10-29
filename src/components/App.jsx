@@ -11,11 +11,8 @@ state = {
   filter: ''
 }
 
-
-
-
 addContact = newContact => {
-  // Приводимо имя нового контакта к нижнему регистру
+  // Приводим имя нового контакта к нижнему регистру
   const normalizeName = newContact.name.toLowerCase();
 
   // Проверяем, существует ли контакт с таким же именем (нормализованным) среди текущих контактов
@@ -42,8 +39,6 @@ deleteContact = (contactId) => {
     contacts: prevState.contacts.filter(contact => contact.id !== contactId),
   }));
 };
-
-
 
     // Метод для получения отфильтрованного массива контактов
   getFilteredContacts = () => {
@@ -74,7 +69,6 @@ deleteContact = (contactId) => {
 
       <ContactList
           contacts={filteredContacts} // Передаем отфильтрованный массив контактов
-          filter={this.state.filter}
             onDeleteContact={this.deleteContact} 
         />
       </div>
@@ -83,3 +77,4 @@ deleteContact = (contactId) => {
 }
 
 export default App;
+

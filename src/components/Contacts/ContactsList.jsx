@@ -1,54 +1,18 @@
-import React, { Component } from "react";
-import { nanoid } from 'nanoid';
+import React from "react";
 import css from 'components/Contacts/Contacts.module.css';
-// import Filter from "../Filter/Filter";
 
-class ContactsList extends Component {
-  state = {
-    contacts: [
-      // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
-    filter: '', // Инициализируем состояние для фильтрации контактов
-    name: '', // Имя нового контакта
-    number: '', // Номер нового контакта
-  };
+export const ContactsList = ({ contacts, onDeleteContact }) => {
 
-  inputId = nanoid(); // Генерируем уникальный идентификатор для инпута. Это может быть полезно, если у вас есть несколько полей ввода на странице и вы хотите, чтобы каждое поле имело свой уникальный идентификатор.
-
-  // Обработчик изменения значений в инпутах
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }
-
-
-
-
-componentDidUpdate(prevProps) {
-  if (prevProps.contacts !== this.props.contacts) {
-    this.setState({
-      contacts: this.props.contacts,
-    });
-  }
-}
-
-  render() {
     return (
 <div className={css.contactsContainer}>
   <ul className={css.contactsList}>
-    {this.state.contacts
-      // Фильтруем контакты по имени с учетом фильтра (приводим к нижнему регистру)
-      .filter(contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))
-      .map(contact => (
+    {contacts.map(contact => (
         <li key={contact.id} className={css.item}>
           {/* Отображаем имя и номер контакта */}
           {contact.name}: {contact.number}
 
           {/* Кнопка "Удалить" с вызовом функцию onDeleteContact с contact.id в качестве аргумента при клике на кнопку */}
-          <button onClick={() => this.props.onDeleteContact(contact.id)}  className={css.deleteButton}>
+          <button onClick={() => onDeleteContact(contact.id)}  className={css.deleteButton}>
             Delete
           </button>
         </li>
@@ -56,7 +20,8 @@ componentDidUpdate(prevProps) {
   </ul>
 </div>
     );
-  }
 }
+
+
 
 export default ContactsList;
