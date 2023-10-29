@@ -35,6 +35,13 @@ addContact = newContact => {
   }));
 };
 
+// Метод для удаления контакта по его ID
+deleteContact = (contactId) => {
+  this.setState(prevState => ({
+    // Обновляем состояние, фильтруя контакты и оставляя только те, у которых ID не совпадает с заданным contactId
+    contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+  }));
+};
 
 
 
@@ -68,6 +75,7 @@ addContact = newContact => {
       <ContactList
           contacts={filteredContacts} // Передаем отфильтрованный массив контактов
           filter={this.state.filter}
+            onDeleteContact={this.deleteContact} 
         />
       </div>
     );

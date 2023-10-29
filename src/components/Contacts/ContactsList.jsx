@@ -25,12 +25,7 @@ class ContactsList extends Component {
   }
 
 
-  // Обработчик удаления контакта по ID
-  handleDeleteContact = (contactId) => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-    }));
-  };
+
 
 componentDidUpdate(prevProps) {
   if (prevProps.contacts !== this.props.contacts) {
@@ -52,8 +47,8 @@ componentDidUpdate(prevProps) {
           {/* Отображаем имя и номер контакта */}
           {contact.name}: {contact.number}
 
-          {/* Кнопка "Удалить" с вызовом handleDeleteContact по клику */}
-          <button onClick={() => this.handleDeleteContact(contact.id)} className={css.deleteButton}>
+          {/* Кнопка "Удалить" с вызовом функцию onDeleteContact с contact.id в качестве аргумента при клике на кнопку */}
+          <button onClick={() => this.props.onDeleteContact(contact.id)}  className={css.deleteButton}>
             Delete
           </button>
         </li>
