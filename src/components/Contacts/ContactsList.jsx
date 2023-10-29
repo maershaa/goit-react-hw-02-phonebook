@@ -5,12 +5,11 @@ import css from 'components/Contacts/Contacts.module.css';
 
 class ContactsList extends Component {
   state = {
-    // Исходное состояние компонента, включая начальные контакты и фильтр
     contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+      // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '', // Инициализируем состояние для фильтрации контактов
     name: '', // Имя нового контакта
@@ -26,30 +25,20 @@ class ContactsList extends Component {
   }
 
 
-
-  // Обработчик добавления нового контакта
-addContact = (contact) => {
-  const { name, number } = contact;
-
-  if (name.trim() === '' || number.trim() === '') {
-    alert('Имя и номер контакта не могут быть пустыми.');
-        console.log(name)
-    return;
-  }
-
-  this.setState(prevState => ({
-    contacts: [...prevState.contacts, { ...contact, id: nanoid() }],
-
-  }));
-
-};
-
   // Обработчик удаления контакта по ID
   handleDeleteContact = (contactId) => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
+
+componentDidUpdate(prevProps) {
+  if (prevProps.contacts !== this.props.contacts) {
+    this.setState({
+      contacts: this.props.contacts,
+    });
+  }
+}
 
   render() {
     return (

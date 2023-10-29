@@ -4,11 +4,11 @@ import css from "../Contacts/Contacts.module.css";
 // Компонент Filter принимает два свойства: value и onChange
 const Filter = ({ value, onChange }) => (
   <input
-    type="text" // Тип поля ввода - текстовое
+    type="text" 
+    name="nameFilter"
     value={value} // Значение поля ввода, переданное через свойство value
-            pattern={"^[a-zA-Zа-яА-Я]+(([' \\-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"}
-    // Регулярное выражение, задающее паттерн для ввода (по имени)
-    onChange={(e) => onChange(e.target.value)} // Обработчик изменения значения в поле ввода
+    pattern={"^[a-zA-Zа-яА-Я]+(([' \\-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"}// Регулярное выражение, задающее паттерн для ввода (по имени)
+    onChange={(e) => onChange(e.target.value)} 
     placeholder="Filter by name" // Плейсхолдер, отображается в поле ввода
     className={css.inputText} // Применение стилей из CSS-модуля
   />

@@ -11,29 +11,29 @@ state = {
   filter: ''
 }
 
-  addContact = newContact => {
-
-    const normalizeName = newContact.name.toLowerCase();// приводимо ім'я до нижнього регістру
-    const checkName = this.state.contacts.find(contact => {
-     return contact.name.toLowerCase() === normalizeName
-    });// перевіряємо ім'я, чи є  в контактах
-
-      console.log(newContact)
-  
-    this.setState(pervState => {
-          if (checkName) { 
-            alert(`${newContact.name} is alredy in contacts`)// якщо є викидаємо помилку
-      return
-    }
-      return {
-        contacts: [...pervState.contacts, newContact],// якщо немає, додаємо до масиву новий контакт
-      
-      };
 
 
-    }
-    );
-  };
+
+addContact = newContact => {
+  // Приводимо имя нового контакта к нижнему регистру
+  const normalizeName = newContact.name.toLowerCase();
+
+  // Проверяем, существует ли контакт с таким же именем (нормализованным) среди текущих контактов
+  const isDuplicate = this.state.contacts.some(
+    contact => contact.name.toLowerCase() === normalizeName
+  );
+
+  // Если контакт уже существует, выводим сообщение и завершаем выполнение функции
+  if (isDuplicate) {
+    alert(`${newContact.name} уже есть в контактах`);
+    return;
+  }
+
+  // Если контакт не является дубликатом, обновляем состояние, добавляя новый контакт в массив контактов
+  this.setState(prevState => ({
+    contacts: [...prevState.contacts, newContact],
+  }));
+};
 
 
 
